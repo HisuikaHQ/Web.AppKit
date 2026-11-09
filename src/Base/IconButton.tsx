@@ -4,9 +4,11 @@ import { ComponentBaseProps } from "../Common/Interfaces";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
+import { focusOnMouseDown } from "../Common/Helpers/focusOnMouseDown";
 import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 interface IconButtonProps extends ComponentBaseProps {
+  onMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
   isGrouped?: boolean;
   isFirst?: boolean;
   isLast?: boolean;
@@ -53,7 +55,8 @@ const StyledIconButton = styled.button.withConfig(omitProps(...STYLE_ONLY_PROPS,
     background-color: ${({ theme }) => resolveTheme(theme).IconButton.active.backgroundColor};
   }
 
-  &:focus-within {
+  &:focus,
+  &:active {
     box-shadow: ${({ theme }) =>
       `${resolveTheme(theme).IconButton.focus.shadowColor} 0 0 0 0.3em`};
   }
@@ -71,12 +74,16 @@ const GroupContainer = styled.div`
 `;
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ isGrouped, isFirst, isLast, ...props }, ref) => {
+  ({ isGrouped, isFirst, isLast, onMouseDown, ...props }, ref) => {
     return (
       <StyledIconButton
         isGrouped={isGrouped}
         isFirst={isFirst}
         isLast={isLast}
+        onMouseDown={(event) => {
+          focusOnMouseDown(event);
+          onMouseDown?.(event);
+        }}
         {...props}
         ref={ref}
       >
