@@ -20,7 +20,7 @@ const buttonStyles = css`
 
 const ButtonBase = styled.button<ButtonProps>`
   ${buttonStyles};
-  border-radius: ${({ theme }) => theme.Base.borderRadius};
+  border-radius: ${({ theme }) => DefaultLight.Base.borderRadius};
 
   ${({ size }) =>
     size === "Small" &&
@@ -45,28 +45,28 @@ const ButtonBase = styled.button<ButtonProps>`
     color !== "Disabled" &&
     css`
       background-color: ${({ theme }) =>
-        theme.Button[color!].backgroundColor ?? "transparent"};
+        DefaultLight.Button[color!].backgroundColor ?? "transparent"};
       border-bottom: 3px solid
-        ${({ theme }) => theme.Button[color!].borderColor ?? "transparent"};
-      color: ${({ theme }) => theme.Button[color!].textColor};
+        ${({ theme }) => DefaultLight.Button[color!].borderColor ?? "transparent"};
+      color: ${({ theme }) => DefaultLight.Button[color!].textColor};
 
       &:hover {
         background-color: ${({ theme }) =>
-          theme.Button[color!].hoverBackgroundColor ?? "transparent"};
+          DefaultLight.Button[color!].hoverBackgroundColor ?? "transparent"};
       }
 
       &:active {
         background-color: ${({ theme }) =>
-          theme.Button[color!].activeBackgroundColor ?? "transparent"};
+          DefaultLight.Button[color!].activeBackgroundColor ?? "transparent"};
       }
 
       &:focus-within {
         box-shadow: ${({ theme }) =>
-            theme.Button[color!].shadowColor ?? "transparent"}
+            DefaultLight.Button[color!].shadowColor ?? "transparent"}
           0 0 0 0.3em;
         border-bottom: 3px solid
           ${({ theme }) =>
-            theme.Button[color!].activeBackgroundColor ?? "transparent"};
+            DefaultLight.Button[color!].activeBackgroundColor ?? "transparent"};
       }
     `}
 
@@ -80,8 +80,10 @@ const ButtonBase = styled.button<ButtonProps>`
 `;
 
 export interface ButtonProps
-  extends ComponentBaseProps,
-    ButtonHTMLAttributes<HTMLButtonElement> {
+  extends 
+    Omit<ComponentBaseProps, "onClick">,
+    ButtonHTMLAttributes<HTMLButtonElement> 
+{
   color?:
     | "Default"
     | "Primary"

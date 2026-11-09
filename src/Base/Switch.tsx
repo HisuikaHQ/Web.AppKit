@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
+import { DefaultLight } from "../Common/Themes/DefaultLight";
+import { CommonTypes } from "../Common/Interfaces";
+import { ButtonProps } from "./Button";
 
 interface SwitchProps extends ComponentBaseProps {
   checked?: boolean;
@@ -14,7 +17,7 @@ const SwitchTrack = styled.div<{
   checked: boolean;
   disabled: boolean;
   size: string;
-  color: string;
+  color: CommonTypes.Color;
 }>`
   position: relative;
   display: inline-block;
@@ -23,7 +26,7 @@ const SwitchTrack = styled.div<{
   height: ${({ size }) =>
     size === "Small" ? "16px" : size === "Medium" ? "20px" : "24px"};
   background-color: ${({ checked, theme, color }) =>
-    checked ? theme.Button[color].backgroundColor : "rgba(0, 0, 0, 0.2)"};
+    checked ? DefaultLight.Button[color].backgroundColor : "rgba(0, 0, 0, 0.2)"};
   border-radius: 999px;
   transition: background-color 0.2s ease;
 `;
@@ -64,7 +67,7 @@ const SwitchButton = styled.button<{ disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 
   &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.Button.Primary.backgroundColor};
+    outline: 2px solid ${({ theme }) => DefaultLight.Button.Primary.backgroundColor};
     outline-offset: 2px;
     border-radius: 4px;
   }

@@ -23,7 +23,6 @@ export function deepMap(
       child.props.children &&
       typeof child.props.children === "object"
     ) {
-      // Clone the child that has children and map them too
       return cloneElement(child, {
         ...child.props,
         children: deepMap(child.props.children, callback),

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import React, { forwardRef, useEffect, useState } from "react";
-import { ComponentBaseProps } from "../Common/Interfaces";
+import { CommonTypes, ComponentBaseProps } from "../Common/Interfaces";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { DefaultLight } from "../Common/Themes/DefaultLight";
 
@@ -18,21 +18,21 @@ const CheckboxInput = styled.input<CheckboxProps>`
   position: relative;
   margin: 0;
   cursor: pointer;
-  border: ${({ theme }) => theme.Checkbox.borderWidth} solid
-    ${({ theme, color = "Default" }) => theme.Button[color].borderColor};
-  border-radius: ${({ theme }) => theme.Checkbox.borderRadius};
-  transition: ${({ theme }) => theme.Checkbox.transition};
+  border: ${({ theme }) => DefaultLight.Checkbox.borderWidth} solid
+    ${({ theme, color = "Default" }) => DefaultLight.Button[color].borderColor};
+  border-radius: ${({ theme }) => DefaultLight.Checkbox.borderRadius};
+  transition: ${({ theme }) => DefaultLight.Checkbox.transition};
 
   ${({ theme, size = "Small" }) => css`
-    width: ${theme.Checkbox.sizes[size].width};
-    height: ${theme.Checkbox.sizes[size].height};
+    width: ${DefaultLight.Checkbox.sizes[size].width};
+    height: ${DefaultLight.Checkbox.sizes[size].height};
   `}
 
   &:checked {
     background-color: ${({ theme, color = "Default" }) =>
-      theme.Button[color].backgroundColor};
+      DefaultLight.Button[color].backgroundColor};
     border-color: ${({ theme, color = "Default" }) =>
-      theme.Button[color].borderColor};
+      DefaultLight.Button[color].borderColor};
 
     &::after {
       content: "";
@@ -42,14 +42,14 @@ const CheckboxInput = styled.input<CheckboxProps>`
       transform: translate(-50%, -50%) rotate(45deg);
       width: 25%;
       height: 50%;
-      border: solid ${({ theme }) => theme.Checkbox.checkmarkColor};
+      border: solid ${({ theme }) => DefaultLight.Checkbox.checkmarkColor};
       border-width: 0 2px 2px 0;
     }
   }
 
   &:focus-visible {
     box-shadow: ${({ theme, color = "Default" }) =>
-        theme.Button[color].shadowColor}
+        DefaultLight.Button[color].shadowColor}
       0 0 0 0.2em;
     outline: none;
   }
@@ -57,16 +57,16 @@ const CheckboxInput = styled.input<CheckboxProps>`
   ${({ theme, disabled }) =>
     disabled &&
     css`
-      opacity: ${theme.Checkbox.disabled.opacity};
+      opacity: ${DefaultLight.Checkbox.disabled.opacity};
       cursor: not-allowed;
       pointer-events: none;
     `}
 `;
 
-const CheckboxLabel = styled.label<{ size?: string }>`
+const CheckboxLabel = styled.label<{ size?: CommonTypes.Size }>`
   font-family: "Outfit", sans-serif;
   font-size: ${({ theme, size = "Small" }) =>
-    theme.Checkbox.sizes[size].fontSize};
+    DefaultLight.Checkbox.sizes[size].fontSize};
 
   cursor: pointer;
 `;

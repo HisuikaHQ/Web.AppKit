@@ -33,6 +33,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "#868686",
       activeBackgroundColor: "#7a7a7a",
       shadowColor: "rgba(122, 122, 122, 0.5)",
+      textColor: "#000000"
     },
     TabButton: {
       backgroundColor: "transparent",
@@ -40,7 +41,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "rgba(0, 0, 0, 0.05)",
       activeBackgroundColor: "rgba(0, 0, 0, 0.1)",
       shadowColor: "rgba(0, 0, 0, 0.1)",
-      textColor: "#666666",
+      textColor: "#666666"
     },
     TabButtonActive: {
       backgroundColor: "rgba(0, 0, 0, 0.05)",
@@ -48,7 +49,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "rgba(0, 0, 0, 0.08)",
       activeBackgroundColor: "rgba(0, 0, 0, 0.1)",
       shadowColor: "rgba(0, 0, 0, 0.1)",
-      textColor: "#000000",
+      textColor: "#000000"
     },
     Primary: {
       backgroundColor: "#1ea7fd",
@@ -56,6 +57,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "#1c9ae8",
       activeBackgroundColor: "#1b91da",
       shadowColor: "rgba(30, 167, 253, 0.5)",
+      textColor: "#000000"
     },
     Success: {
       backgroundColor: "#12c421",
@@ -63,6 +65,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "#10b01d",
       activeBackgroundColor: "#1fa82b",
       shadowColor: "rgba(73, 252, 89, 0.4)",
+      textColor: "#000000"
     },
     Warning: {
       backgroundColor: "#eab403",
@@ -70,6 +73,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "#d2a203",
       activeBackgroundColor: "#bb9002",
       shadowColor: "rgba(243, 197, 44, 0.5)",
+      textColor: "#000000"
     },
     Alert: {
       backgroundColor: "#ff5724",
@@ -77,6 +81,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "#d0491c",
       activeBackgroundColor: "#b63b17",
       shadowColor: "rgba(255, 120, 79, 0.5)",
+      textColor: "#000000"
     },
     Disabled: {
       backgroundColor: "#e0e0e0",
@@ -84,6 +89,7 @@ export const DefaultLight = {
       hoverBackgroundColor: "#e0e0e0",
       activeBackgroundColor: "#e0e0e0",
       shadowColor: "rgba(0, 0, 0, 0.1)",
+      textColor: "#000000"
     },
   },
   Checkbox: {

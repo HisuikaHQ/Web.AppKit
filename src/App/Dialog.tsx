@@ -4,7 +4,6 @@ import { createPortal } from "react-dom";
 import styled, { css, keyframes } from "styled-components";
 import { LayoutProps } from "../Layouts/Layout";
 import { IconButton } from "../Base/IconButton";
-import { X } from "lucide-react";
 import { Text } from "../Base/Text";
 import { FlexLayout } from "../Layouts/FlexLayout";
 
@@ -87,7 +86,7 @@ export const DialogHeader = ({
       </FlexLayout>
       {onClose && (
         <IconButton onClick={onClose}>
-          <X size={18} />
+          X
         </IconButton>
       )}
     </StyledDialogHeader>
@@ -159,7 +158,7 @@ export function Dialog({
             ) : (
               <CloseButton>
                 <IconButton onClick={onClose}>
-                  <X size={18} />
+                  X
                 </IconButton>
               </CloseButton>
             )}

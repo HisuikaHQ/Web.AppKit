@@ -1,11 +1,11 @@
-import React, {CSSProperties} from "react";
+import React, {CSSProperties, MouseEventHandler} from "react";
 import {CommonTypes} from "./CommonTypes";
 import {LayoutProps} from "../../Layouts/Layout";
 
 export interface ComponentBaseProps extends LayoutProps {
     className?: string;
     style?: CSSProperties;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: React.UIEvent<HTMLElement>) => void | MouseEventHandler<HTMLInputElement> | undefined ;
     disabled?: boolean;
     autofocus?: boolean;
     size?: CommonTypes.Size;

@@ -1,18 +1,20 @@
 import styled, { css } from "styled-components";
-import React, { forwardRef, useEffect, useState } from "react";
-import { ComponentBaseProps } from "../Common/Interfaces";
+import React, { forwardRef } from "react";
+import {CommonTypes, ComponentBaseProps} from "../Common/Interfaces";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { DefaultLight } from "../Common/Themes/DefaultLight";
 
-const RadioContainer = styled.div<{ theme: typeof DefaultLight }>`
+const RadioContainer = styled.div<{ theme: typeof DefaultLight }>
+`
   display: inline-flex;
   align-items: center;
-  gap: ${({ theme }) => theme.RadioButton.gap};
+  gap: ${({ theme } ) => theme.RadioButton.gap};
   cursor: pointer;
   user-select: none;
 `;
 
-const RadioInput = styled.input<RadioProps>`
+const RadioInput = styled.input<RadioProps>
+`
   ${baseStyling};
   appearance: none;
   position: relative;
@@ -63,14 +65,20 @@ const RadioInput = styled.input<RadioProps>`
     `}
 `;
 
-const RadioLabel = styled.label<{ size?: string }>`
+const RadioLabel = styled.label<{
+    size: CommonTypes.Size, theme: typeof DefaultLight
+}>
+`
   font-family: "Outfit", sans-serif;
-  font-size: ${({ theme, size = "Small" }) =>
+  font-size: ${({ theme, size }) =>
     theme.RadioButton.sizes[size].fontSize};
   cursor: pointer;
 `;
 
-const StyledRadioGroup = styled.div<{ direction?: "horizontal" | "vertical" }>`
+const StyledRadioGroup = styled.div<{
+    direction?: "horizontal" | "vertical", theme: typeof DefaultLight
+}>
+`
   display: flex;
   flex-direction: ${({ direction }) =>
     direction === "horizontal" ? "row" : "column"};
@@ -84,6 +92,7 @@ export interface RadioProps extends ComponentBaseProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   value?: string;
+  theme?: typeof DefaultLight;
 }
 
 interface RadioGroupProps

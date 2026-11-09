@@ -3,6 +3,7 @@ import React, { forwardRef, ReactElement } from "react";
 import { ComponentBaseProps } from "../Common/Interfaces";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
+import { DefaultLight } from "../Common/Themes/DefaultLight";
 
 interface IconButtonProps extends ComponentBaseProps {
   isGrouped?: boolean;
@@ -21,14 +22,14 @@ const StyledIconButton = styled.button<IconButtonProps>`
   place-items: center;
   background: none;
   color: ${({ theme }) =>
-    theme.IconButton.color[theme === "Dark" ? "dark" : "light"]};
-  padding: ${({ theme }) => theme.IconButton.padding};
+    DefaultLight.IconButton.color[theme === "Dark" ? "dark" : "light"]};
+  padding: ${({ theme }) => DefaultLight.IconButton.padding};
   border-radius: ${({ theme, isGrouped, isFirst, isLast }) => {
-    if (!isGrouped) return theme.IconButton.borderRadius;
+    if (!isGrouped) return DefaultLight.IconButton.borderRadius;
     if (isFirst)
-      return `${theme.IconButton.borderRadius} 0 0 ${theme.IconButton.borderRadius}`;
+      return `${DefaultLight.IconButton.borderRadius} 0 0 ${DefaultLight.IconButton.borderRadius}`;
     if (isLast)
-      return `0 ${theme.IconButton.borderRadius} ${theme.IconButton.borderRadius} 0`;
+      return `0 ${DefaultLight.IconButton.borderRadius} ${DefaultLight.IconButton.borderRadius} 0`;
     return "0";
   }};
 
@@ -44,16 +45,16 @@ const StyledIconButton = styled.button<IconButtonProps>`
     `}
 
   &:hover {
-    background-color: ${({ theme }) => theme.IconButton.hover.backgroundColor};
+    background-color: ${({ theme }) => DefaultLight.IconButton.hover.backgroundColor};
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.IconButton.active.backgroundColor};
+    background-color: ${({ theme }) => DefaultLight.IconButton.active.backgroundColor};
   }
 
   &:focus-within {
     box-shadow: ${({ theme }) =>
-      `${theme.IconButton.focus.shadowColor} 0 0 0 0.3em`};
+      `${DefaultLight.IconButton.focus.shadowColor} 0 0 0 0.3em`};
   }
 `;
 

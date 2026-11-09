@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import {FlexLayout} from "../Layouts/FlexLayout";
 import {ComponentBaseProps} from "../Common/Interfaces";
+import {DefaultLight} from "../Common/Themes/DefaultLight";
 
 const UiAppElement = styled(FlexLayout)`
-    background-color: ${({theme}) => theme.UiApp.backgroundColor};
-    border: ${({theme}) => theme.UiApp.border + ';'});
-    box-shadow: ${({theme}) => theme.UiApp.boxShadow + ';'});
-    border-radius: ${({theme}) => theme.UiApp.borderRadius + ';'});
-    margin: ${({theme}) => theme.UiApp.margin + ';'});
+    background-color: ${({theme}) => DefaultLight.UiApp.backgroundColor};
+    border: ${({theme}) => DefaultLight.UiApp.border + ';'});
+    box-shadow: ${({theme}) => DefaultLight.UiApp.boxShadow + ';'});
+    border-radius: ${({theme}) => DefaultLight.UiApp.borderRadius + ';'});
+    margin: ${({theme}) => DefaultLight.UiApp.margin + ';'});
     flex: 1;
 `;
 

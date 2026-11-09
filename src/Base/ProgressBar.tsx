@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
+import { DefaultLight } from "../Common/Themes/DefaultLight";
+import { CommonTypes } from "../Common/Interfaces";
 
 type HTMLDivProps = Pick<
   React.HTMLAttributes<HTMLDivElement>,
@@ -8,17 +10,11 @@ type HTMLDivProps = Pick<
 >;
 
 interface ProgressBarProps extends ComponentBaseProps, HTMLDivProps {
-  /** Progress value from 0 to 100 */
   value: number;
-  /** Show indeterminate loading animation */
   indeterminate?: boolean;
-  /** Color variant of the progress bar */
-  color?: "Default" | "Primary" | "Success" | "Warning" | "Alert";
-  /** Size of the progress bar */
+  color?: CommonTypes.Color;
   size?: "Small" | "Medium" | "Large";
-  /** Show percentage text */
   showPercentage?: boolean;
-  /** Custom label */
   label?: string;
 }
 
@@ -55,14 +51,14 @@ const BarContainer = styled.div<{ size: string }>`
   position: relative;
 `;
 
-const DeterminateBar = styled.div<{ value: number; color: string }>`
+const DeterminateBar = styled.div<{ value: number; color: CommonTypes.Color }>`
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: ${({ value }) => `${value}%`};
   background-color: ${({ theme, color }) =>
-    theme.Button[color].backgroundColor};
+    DefaultLight.Button[color].backgroundColor};
   border-radius: 999px;
   transition: width 0.2s ease;
 `;
@@ -74,7 +70,7 @@ const IndeterminateBar = styled.div<{ color: string }>`
   height: 100%;
   width: 100%;
   background-color: ${({ theme, color }) =>
-    theme.Button[color].backgroundColor};
+    DefaultLight.Button[color].backgroundColor};
   border-radius: 999px;
   transform-origin: left;
   animation: ${primaryIndeterminate} 2s infinite linear;

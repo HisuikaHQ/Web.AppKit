@@ -6,7 +6,7 @@ import {LayoutProps} from "../Layouts/Layout";
 
 interface AppActivityProps extends LayoutProps {
     direction?: "Vertical" | "Horizontal";
-    theme?: "Light" | "Dark";
+    theme: typeof DefaultLight | "Light" | "Dark";
 }
 
 const AppActivityElement = styled(FlexLayout)<AppActivityProps>`
@@ -30,9 +30,15 @@ const AppActivityElement = styled(FlexLayout)<AppActivityProps>`
         "GRAD" 0,
         "opsz" 48;
     }
-
+    
     &.AppActivity {
-        background-color: ${({theme}) => theme.AppActivity.backgroundColor};
+        // FIXME: issue with dynamic theming
+        background-color: ${
+                ({theme}) => 
+                    theme === "Light" 
+                            ? DefaultLight.AppActivity.backgroundColor 
+                            : DefaultLight.AppActivity.backgroundColor
+                }; // FIXME:  DefaultDark.AppActivity.backgroundColor instead.
         min-height: 100vh;
     }
 
