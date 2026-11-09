@@ -9,7 +9,6 @@ import { ComponentBaseProps } from "../Common/Interfaces";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
-import { focusOnMouseDown } from "../Common/Helpers/focusOnMouseDown";
 import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 const buttonStyles = css`
@@ -62,7 +61,7 @@ const ButtonBase = styled.button.withConfig(omitProps(...STYLE_ONLY_PROPS, "colo
           resolveTheme(theme).Button[color!].activeBackgroundColor ?? "transparent"};
       }
 
-      &:focus,
+      &:focus-visible,
       &:active {
         box-shadow: ${({ theme }) =>
             resolveTheme(theme).Button[color!].shadowColor ?? "transparent"}
@@ -106,7 +105,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "Small",
       disabled,
       onClick,
-      onMouseDown,
       autofocus,
       label,
       ...props
@@ -127,10 +125,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         autoFocus={autofocus}
         onClick={onClick}
-        onMouseDown={(event) => {
-          focusOnMouseDown(event);
-          onMouseDown?.(event);
-        }}
         {...props}
       >
         {label ?? props.children}
