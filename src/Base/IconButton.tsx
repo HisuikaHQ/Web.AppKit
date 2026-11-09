@@ -4,6 +4,7 @@ import { ComponentBaseProps } from "../Common/Interfaces";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
+import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 interface IconButtonProps extends ComponentBaseProps {
   isGrouped?: boolean;
@@ -15,7 +16,7 @@ interface GroupIconButtonsProps extends Omit<ComponentBaseProps, "onClick"> {
   children: React.ReactNode;
 }
 
-const StyledIconButton = styled.button<IconButtonProps>`
+const StyledIconButton = styled.button.withConfig(omitProps(...STYLE_ONLY_PROPS, "isGrouped", "isFirst", "isLast"))<IconButtonProps>`
   ${baseStyling};
   ${buttonBaseStyling};
   display: grid;

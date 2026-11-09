@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
+import { omitProps } from "../Common/Styling/omitProps";
 
 // Arrow constants
 const ARROW = {
@@ -122,7 +123,7 @@ const getArrowStyles = (position: string, arrowSize: number = ARROW.SIZE) => {
   }
 };
 
-const Content = styled.div<{
+const Content = styled.div.withConfig(omitProps("position", "show", "maxWidth"))<{
   position: string;
   show: boolean;
   maxWidth: number;

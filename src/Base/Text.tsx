@@ -1,6 +1,7 @@
 import React, { CSSProperties, ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
+import { omitProps } from "../Common/Styling/omitProps";
 
 export interface TextProps
   extends React.DetailedHTMLProps<
@@ -17,7 +18,7 @@ export interface TextProps
   wordWrap?: boolean;
 }
 
-const TextElement = styled.p<{
+const TextElement = styled.p.withConfig(omitProps("disabled", "color", "size", "wordWrap"))<{
   disabled?: boolean;
   color?: string;
   size?: number;

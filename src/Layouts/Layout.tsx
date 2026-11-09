@@ -2,6 +2,7 @@ import React, {ReactNode} from "react";
 import styled from "styled-components";
 import {CommonTypes} from "../Common/Interfaces";
 import type {UiTheme} from "../Common/Themes/UiTheme";
+import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 export interface LayoutProps {
     children?: ReactNode;
@@ -17,7 +18,7 @@ export interface LayoutProps {
     theme?: UiTheme;
 }
 
-const LayoutElement = styled.div<LayoutProps>`
+const LayoutElement = styled.div.withConfig(omitProps(...STYLE_ONLY_PROPS))<LayoutProps>`
     display: block;
     overflow: ${({overflow}) => overflow?.toLowerCase()};
     width: ${({width}) => (width ? width + "px" : "auto")};

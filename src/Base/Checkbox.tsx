@@ -3,6 +3,7 @@ import React, { forwardRef, useEffect, useState } from "react";
 import { CommonTypes, ComponentBaseProps } from "../Common/Interfaces";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
+import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 const CheckboxContainer = styled.div`
   display: inline-flex;
@@ -12,7 +13,7 @@ const CheckboxContainer = styled.div`
   user-select: none;
 `;
 
-const CheckboxInput = styled.input<CheckboxProps>`
+const CheckboxInput = styled.input.withConfig(omitProps(...STYLE_ONLY_PROPS, "color"))<CheckboxProps>`
   ${baseStyling};
   appearance: none;
   position: relative;
@@ -63,7 +64,7 @@ const CheckboxInput = styled.input<CheckboxProps>`
     `}
 `;
 
-const CheckboxLabel = styled.label<{ size?: CommonTypes.Size }>`
+const CheckboxLabel = styled.label.withConfig(omitProps("size"))<{ size?: CommonTypes.Size }>`
   font-family: "Outfit", sans-serif;
   font-size: ${({ theme, size = "Small" }) =>
     resolveTheme(theme).Checkbox.sizes[size].fontSize};

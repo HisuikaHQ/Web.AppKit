@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {baseStyling} from "../Common/Styling/baseStyling";
 import {ComponentBaseProps} from "../Common/Interfaces";
 import {resolveTheme} from "../Common/Themes/resolveTheme";
+import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 export interface TextFieldProps
     extends React.DetailedHTMLProps<
@@ -16,7 +17,7 @@ export interface TextFieldProps
     disabled?: boolean;
 }
 
-const TextFieldElement = styled.input<{ invalid?: boolean } & Omit<ComponentBaseProps, "size" | "onClick">>`
+const TextFieldElement = styled.input.withConfig(omitProps(...STYLE_ONLY_PROPS, "invalid"))<{ invalid?: boolean } & Omit<ComponentBaseProps, "size" | "onClick">>`
     ${baseStyling};
     height: auto;
     border-radius: ${({theme}) => resolveTheme(theme).Base.borderRadius};

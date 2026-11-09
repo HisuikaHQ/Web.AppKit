@@ -6,6 +6,7 @@ import { LayoutProps } from "../Layouts/Layout";
 import { IconButton } from "../Base/IconButton";
 import { Text } from "../Base/Text";
 import { FlexLayout } from "../Layouts/FlexLayout";
+import { omitProps } from "../Common/Styling/omitProps";
 
 const fadeIn = keyframes`
     from {
@@ -25,7 +26,7 @@ const fadeOut = keyframes`
     }
 `;
 
-const DialogElement = styled.div<{ closing: boolean }>`
+const DialogElement = styled.div.withConfig(omitProps("closing"))<{ closing: boolean }>`
   z-index: 1000;
   position: absolute;
   top: 0;

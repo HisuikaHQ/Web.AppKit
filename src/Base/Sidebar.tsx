@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styled, {keyframes} from "styled-components";
 import {SidebarItem} from "./SidebarItem";
 import SidebarContext from "./SidebarContext";
+import { omitProps } from "../Common/Styling/omitProps";
 
 export interface SidebarProps {
     className?: string;
@@ -19,7 +20,7 @@ const closeAnim = keyframes`
     }
 `;
 
-const SidebarElement = styled.div<{ closed?: boolean }>`
+const SidebarElement = styled.div.withConfig(omitProps("closed"))<{ closed?: boolean }>`
     display: flex;
     flex-direction: column;
     font-family: "Outfit", sans-serif;

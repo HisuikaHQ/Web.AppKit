@@ -3,6 +3,7 @@ import React, { forwardRef } from "react";
 import {CommonTypes, ComponentBaseProps} from "../Common/Interfaces";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
+import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 const RadioContainer = styled.div`
   display: inline-flex;
@@ -12,7 +13,7 @@ const RadioContainer = styled.div`
   user-select: none;
 `;
 
-const RadioInput = styled.input<RadioProps>`
+const RadioInput = styled.input.withConfig(omitProps(...STYLE_ONLY_PROPS, "color"))<RadioProps>`
   ${baseStyling};
   appearance: none;
   position: relative;
@@ -63,7 +64,7 @@ const RadioInput = styled.input<RadioProps>`
     `}
 `;
 
-const RadioLabel = styled.label<{
+const RadioLabel = styled.label.withConfig(omitProps("size"))<{
     size: CommonTypes.Size
 }>`
   font-family: "Outfit", sans-serif;
@@ -72,7 +73,7 @@ const RadioLabel = styled.label<{
   cursor: pointer;
 `;
 
-const StyledRadioGroup = styled.div<{
+const StyledRadioGroup = styled.div.withConfig(omitProps("direction"))<{
     direction?: "horizontal" | "vertical"
 }>`
   display: flex;

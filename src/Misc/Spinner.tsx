@@ -1,6 +1,7 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
 import {CommonTypes, ComponentBaseProps} from "../Common/Interfaces";
+import { omitProps } from "../Common/Styling/omitProps";
 
 interface SpinnerProps extends ComponentBaseProps {
     color: "Default" | "Blue",
@@ -22,14 +23,14 @@ const spinAnim = keyframes`
     }
 `;
 
-const SpinnerElement = styled.div<SpinnerProps>`
+const SpinnerElement = styled.div.withConfig(omitProps("color", "size"))<SpinnerProps>`
     display: inline-flex;
     width: fit-content;
     height: fit-content;
     animation: ${spinAnim} 1.5s infinite linear;
 `;
 
-const SvgElement = styled.svg<SpinnerProps>`
+const SvgElement = styled.svg.withConfig(omitProps("color", "size"))<SpinnerProps>`
     ${({size}) =>
             size === "Small"
                     ? "height: 15px"

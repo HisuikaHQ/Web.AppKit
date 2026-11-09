@@ -2,8 +2,9 @@ import styled from "styled-components";
 import {baseStyling} from "../Common/Styling/baseStyling";
 import {ComponentBaseProps} from "../Common/Interfaces";
 import {resolveTheme} from "../Common/Themes/resolveTheme";
+import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
-const StyledBubble = styled.div`
+const StyledBubble = styled.div.withConfig(omitProps(...STYLE_ONLY_PROPS, "disabled"))`
     ${baseStyling};
     display: grid;
     place-items: center;

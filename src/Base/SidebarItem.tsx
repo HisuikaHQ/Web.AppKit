@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import { omitProps } from "../Common/Styling/omitProps";
 
 interface SidebarItemProps {
   text?: string;
@@ -11,7 +12,7 @@ interface SidebarItemProps {
   className?: string;
 }
 
-const SidebarItemElement = styled.div<{ active?: boolean }>`
+const SidebarItemElement = styled.div.withConfig(omitProps("active"))<{ active?: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,7 +44,7 @@ const SidebarItemElement = styled.div<{ active?: boolean }>`
   }
 `;
 
-const IconElement = styled.span<{ active?: boolean }>`
+const IconElement = styled.span.withConfig(omitProps("active"))<{ active?: boolean }>`
   font-variation-settings: ${(props) => (props.active ? "FILL 1" : "FILL 0")};
 `;
 

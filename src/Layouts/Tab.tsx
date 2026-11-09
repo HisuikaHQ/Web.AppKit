@@ -1,8 +1,9 @@
 import React, { FunctionComponent, ReactNode, useEffect, useRef } from "react";
 import styled from "styled-components";
 import cx from "clsx";
+import { omitProps } from "../Common/Styling/omitProps";
 
-const TabElement = styled.li<{ selected: boolean }>`
+const TabElement = styled.li.withConfig(omitProps("selected"))<{ selected: boolean }>`
   display: inline-block;
   padding: 0.5em;
   border-radius: 5px;

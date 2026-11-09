@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
 import { CommonTypes } from "../Common/Interfaces";
+import { omitProps } from "../Common/Styling/omitProps";
 
 interface SwitchProps extends ComponentBaseProps {
   checked?: boolean;
@@ -12,7 +13,7 @@ interface SwitchProps extends ComponentBaseProps {
   color?: "Default" | "Primary" | "Success" | "Warning" | "Alert";
 }
 
-const SwitchTrack = styled.div<{
+const SwitchTrack = styled.div.withConfig(omitProps("checked", "disabled", "size", "color"))<{
   checked: boolean;
   disabled: boolean;
   size: string;
@@ -30,7 +31,7 @@ const SwitchTrack = styled.div<{
   transition: background-color 0.2s ease;
 `;
 
-const SwitchThumb = styled.div<{ checked: boolean; size: string }>`
+const SwitchThumb = styled.div.withConfig(omitProps("checked", "size"))<{ checked: boolean; size: string }>`
   position: absolute;
   top: 50%;
   left: 2px;

@@ -9,6 +9,7 @@ import { ComponentBaseProps } from "../Common/Interfaces";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
+import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
 const buttonStyles = css`
   ${baseStyling};
@@ -18,7 +19,7 @@ const buttonStyles = css`
   font-size: 9pt;
 `;
 
-const ButtonBase = styled.button<ButtonProps>`
+const ButtonBase = styled.button.withConfig(omitProps(...STYLE_ONLY_PROPS, "color", "label"))<ButtonProps>`
   ${buttonStyles};
   border-radius: ${({ theme }) => resolveTheme(theme).Base.borderRadius};
 

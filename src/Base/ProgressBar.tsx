@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
 import { CommonTypes } from "../Common/Interfaces";
+import { omitProps } from "../Common/Styling/omitProps";
 
 type HTMLDivProps = Pick<
   React.HTMLAttributes<HTMLDivElement>,
@@ -41,7 +42,7 @@ const Container = styled.div<ContainerProps>`
   gap: 4px;
 `;
 
-const BarContainer = styled.div<{ size: string }>`
+const BarContainer = styled.div.withConfig(omitProps("size"))<{ size: string }>`
   width: 100%;
   height: ${({ size }) =>
     size === "Small" ? "4px" : size === "Medium" ? "8px" : "12px"};
@@ -51,7 +52,7 @@ const BarContainer = styled.div<{ size: string }>`
   position: relative;
 `;
 
-const DeterminateBar = styled.div<{ value: number; color: CommonTypes.Color }>`
+const DeterminateBar = styled.div.withConfig(omitProps("value", "color"))<{ value: number; color: CommonTypes.Color }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -63,7 +64,7 @@ const DeterminateBar = styled.div<{ value: number; color: CommonTypes.Color }>`
   transition: width 0.2s ease;
 `;
 
-const IndeterminateBar = styled.div<{ color: CommonTypes.Color }>`
+const IndeterminateBar = styled.div.withConfig(omitProps("color"))<{ color: CommonTypes.Color }>`
   position: absolute;
   top: 0;
   left: 0;

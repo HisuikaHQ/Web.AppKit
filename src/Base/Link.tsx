@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {baseStyling} from "../Common/Styling/baseStyling";
 import {resolveTheme} from "../Common/Themes/resolveTheme";
 import type {UiTheme} from "../Common/Themes/UiTheme";
+import { omitProps } from "../Common/Styling/omitProps";
 
 export interface LinkProps {
     className?: string;
@@ -12,7 +13,7 @@ export interface LinkProps {
     theme?: UiTheme;
 }
 
-const LinkElement = styled.a<LinkProps>`
+const LinkElement = styled.a.withConfig(omitProps("disabled"))<LinkProps>`
     ${baseStyling};
     font-weight: 500;
     color: ${({disabled, theme}) =>
