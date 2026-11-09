@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {FlexLayout} from "../Layouts/FlexLayout";
-import {ComponentBaseProps} from "../Common/Interfaces";
+import type { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import {resolveTheme} from "../Common/Themes/resolveTheme";
 
 const UiAppElement = styled(FlexLayout)`

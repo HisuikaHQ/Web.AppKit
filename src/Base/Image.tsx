@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import {ComponentBaseProps} from "../Common/Interfaces";
+import type { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 
 interface ImageProps extends ComponentBaseProps {
     src: string;

@@ -1,6 +1,7 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
-import {CommonTypes, ComponentBaseProps} from "../Common/Interfaces";
+import type { CommonTypes } from "../Common/Interfaces/CommonTypes";
+import type { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import { omitProps } from "../Common/Styling/omitProps";
 
 interface SpinnerProps extends ComponentBaseProps {

@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react-vite";
 import { ThemeProvider } from "styled-components";
-import { DefaultDark, DefaultLight } from "../src/Common/Themes";
+import { DefaultDark } from "../src/Common/Themes/DefaultDark";
+import { DefaultLight } from "../src/Common/Themes/DefaultLight";
 import "../src/Common/fonts.scss";
 
 const themes = { Light: DefaultLight, Dark: DefaultDark };

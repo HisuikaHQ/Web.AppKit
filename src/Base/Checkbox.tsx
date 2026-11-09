@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import React, { forwardRef, useEffect, useState } from "react";
-import { CommonTypes, ComponentBaseProps } from "../Common/Interfaces";
+import type { CommonTypes } from "../Common/Interfaces/CommonTypes";
+import type { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
 import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";

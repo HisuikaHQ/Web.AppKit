@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
-import { CommonTypes } from "../Common/Interfaces";
+import type { CommonTypes } from "../Common/Interfaces/CommonTypes";
 import { omitProps } from "../Common/Styling/omitProps";
 
 type HTMLDivProps = Pick<

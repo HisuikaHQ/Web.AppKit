@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import { resolveTheme } from "../Common/Themes/resolveTheme";
-import { CommonTypes } from "../Common/Interfaces";
+import type { CommonTypes } from "../Common/Interfaces/CommonTypes";
 import { omitProps } from "../Common/Styling/omitProps";
 
 interface SwitchProps extends ComponentBaseProps {

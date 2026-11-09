@@ -13,7 +13,8 @@ import { StackLayout } from "../../Layouts/StackLayout";
 import { BubbleContainer } from "../../Base/BubbleContainer";
 import { ScrollLayout } from "../../Layouts/ScrollLayout";
 import { Radio, RadioGroup } from "../../Base/Radio";
-import { DefaultDark, DefaultLight } from "../Themes";
+import { DefaultDark } from "../Themes/DefaultDark";
+import { DefaultLight } from "../Themes/DefaultLight";
 
 import HelpOutlineIcon from "@mui/icons-material/HelpOutlined";
 import ScheduleIcon from "@mui/icons-material/Schedule";

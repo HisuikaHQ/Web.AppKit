@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Text} from "../Base/Text";
 import {FlexLayout} from "../Layouts/FlexLayout";
-import {ComponentBaseProps} from "../Common/Interfaces";
+import type { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import {resolveTheme} from "../Common/Themes/resolveTheme";
 
 const HeaderElement = styled(FlexLayout)<AppHeaderProps>`

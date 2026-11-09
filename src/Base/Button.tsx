@@ -5,7 +5,7 @@ import React, {
   useState,
   ButtonHTMLAttributes,
 } from "react";
-import { ComponentBaseProps } from "../Common/Interfaces";
+import type { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
 import { resolveTheme } from "../Common/Themes/resolveTheme";

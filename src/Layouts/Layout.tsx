@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import styled from "styled-components";
-import {CommonTypes} from "../Common/Interfaces";
+import type { CommonTypes } from "../Common/Interfaces/CommonTypes";
 import type {UiTheme} from "../Common/Themes/UiTheme";
 import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 

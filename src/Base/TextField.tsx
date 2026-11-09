@@ -1,7 +1,7 @@
 import React, {forwardRef} from "react";
 import styled from "styled-components";
 import {baseStyling} from "../Common/Styling/baseStyling";
-import {ComponentBaseProps} from "../Common/Interfaces";
+import type { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
 import {resolveTheme} from "../Common/Themes/resolveTheme";
 import { omitProps, STYLE_ONLY_PROPS } from "../Common/Styling/omitProps";
 
