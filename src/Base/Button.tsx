@@ -8,7 +8,7 @@ import React, {
 import { ComponentBaseProps } from "../Common/Interfaces";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
-import { DefaultLight } from "../Common/Themes/DefaultLight";
+import { resolveTheme } from "../Common/Themes/resolveTheme";
 
 const buttonStyles = css`
   ${baseStyling};
@@ -20,7 +20,7 @@ const buttonStyles = css`
 
 const ButtonBase = styled.button<ButtonProps>`
   ${buttonStyles};
-  border-radius: ${({ theme }) => DefaultLight.Base.borderRadius};
+  border-radius: ${({ theme }) => resolveTheme(theme).Base.borderRadius};
 
   ${({ size }) =>
     size === "Small" &&
@@ -45,28 +45,28 @@ const ButtonBase = styled.button<ButtonProps>`
     color !== "Disabled" &&
     css`
       background-color: ${({ theme }) =>
-        DefaultLight.Button[color!].backgroundColor ?? "transparent"};
+        resolveTheme(theme).Button[color!].backgroundColor ?? "transparent"};
       border-bottom: 3px solid
-        ${({ theme }) => DefaultLight.Button[color!].borderColor ?? "transparent"};
-      color: ${({ theme }) => DefaultLight.Button[color!].textColor};
+        ${({ theme }) => resolveTheme(theme).Button[color!].borderColor ?? "transparent"};
+      color: ${({ theme }) => resolveTheme(theme).Button[color!].textColor};
 
       &:hover {
         background-color: ${({ theme }) =>
-          DefaultLight.Button[color!].hoverBackgroundColor ?? "transparent"};
+          resolveTheme(theme).Button[color!].hoverBackgroundColor ?? "transparent"};
       }
 
       &:active {
         background-color: ${({ theme }) =>
-          DefaultLight.Button[color!].activeBackgroundColor ?? "transparent"};
+          resolveTheme(theme).Button[color!].activeBackgroundColor ?? "transparent"};
       }
 
       &:focus-within {
         box-shadow: ${({ theme }) =>
-            DefaultLight.Button[color!].shadowColor ?? "transparent"}
+            resolveTheme(theme).Button[color!].shadowColor ?? "transparent"}
           0 0 0 0.3em;
         border-bottom: 3px solid
           ${({ theme }) =>
-            DefaultLight.Button[color!].activeBackgroundColor ?? "transparent"};
+            resolveTheme(theme).Button[color!].activeBackgroundColor ?? "transparent"};
       }
     `}
 
@@ -100,7 +100,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       color = "Default",
-      theme = "Light",
       size = "Small",
       disabled,
       onClick,
@@ -118,7 +117,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <ButtonBase
-        theme={theme === "Light" ? DefaultLight : DefaultLight}
         size={size}
         color={color}
         disabled={disable}

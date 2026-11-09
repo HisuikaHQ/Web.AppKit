@@ -2,12 +2,12 @@ import styled, { css } from "styled-components";
 import React, { forwardRef, useEffect, useState } from "react";
 import { CommonTypes, ComponentBaseProps } from "../Common/Interfaces";
 import { baseStyling } from "../Common/Styling/baseStyling";
-import { DefaultLight } from "../Common/Themes/DefaultLight";
+import { resolveTheme } from "../Common/Themes/resolveTheme";
 
-const CheckboxContainer = styled.div<{ theme: typeof DefaultLight }>`
+const CheckboxContainer = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: ${({ theme }) => theme.Checkbox.gap};
+  gap: ${({ theme }) => resolveTheme(theme).Checkbox.gap};
   cursor: pointer;
   user-select: none;
 `;
@@ -18,21 +18,21 @@ const CheckboxInput = styled.input<CheckboxProps>`
   position: relative;
   margin: 0;
   cursor: pointer;
-  border: ${({ theme }) => DefaultLight.Checkbox.borderWidth} solid
-    ${({ theme, color = "Default" }) => DefaultLight.Button[color].borderColor};
-  border-radius: ${({ theme }) => DefaultLight.Checkbox.borderRadius};
-  transition: ${({ theme }) => DefaultLight.Checkbox.transition};
+  border: ${({ theme }) => resolveTheme(theme).Checkbox.borderWidth} solid
+    ${({ theme, color = "Default" }) => resolveTheme(theme).Button[color].borderColor};
+  border-radius: ${({ theme }) => resolveTheme(theme).Checkbox.borderRadius};
+  transition: ${({ theme }) => resolveTheme(theme).Checkbox.transition};
 
   ${({ theme, size = "Small" }) => css`
-    width: ${DefaultLight.Checkbox.sizes[size].width};
-    height: ${DefaultLight.Checkbox.sizes[size].height};
+    width: ${resolveTheme(theme).Checkbox.sizes[size].width};
+    height: ${resolveTheme(theme).Checkbox.sizes[size].height};
   `}
 
   &:checked {
     background-color: ${({ theme, color = "Default" }) =>
-      DefaultLight.Button[color].backgroundColor};
+      resolveTheme(theme).Button[color].backgroundColor};
     border-color: ${({ theme, color = "Default" }) =>
-      DefaultLight.Button[color].borderColor};
+      resolveTheme(theme).Button[color].borderColor};
 
     &::after {
       content: "";
@@ -42,14 +42,14 @@ const CheckboxInput = styled.input<CheckboxProps>`
       transform: translate(-50%, -50%) rotate(45deg);
       width: 25%;
       height: 50%;
-      border: solid ${({ theme }) => DefaultLight.Checkbox.checkmarkColor};
+      border: solid ${({ theme }) => resolveTheme(theme).Checkbox.checkmarkColor};
       border-width: 0 2px 2px 0;
     }
   }
 
   &:focus-visible {
     box-shadow: ${({ theme, color = "Default" }) =>
-        DefaultLight.Button[color].shadowColor}
+        resolveTheme(theme).Button[color].shadowColor}
       0 0 0 0.2em;
     outline: none;
   }
@@ -57,7 +57,7 @@ const CheckboxInput = styled.input<CheckboxProps>`
   ${({ theme, disabled }) =>
     disabled &&
     css`
-      opacity: ${DefaultLight.Checkbox.disabled.opacity};
+      opacity: ${resolveTheme(theme).Checkbox.disabled.opacity};
       cursor: not-allowed;
       pointer-events: none;
     `}
@@ -66,7 +66,7 @@ const CheckboxInput = styled.input<CheckboxProps>`
 const CheckboxLabel = styled.label<{ size?: CommonTypes.Size }>`
   font-family: "Outfit", sans-serif;
   font-size: ${({ theme, size = "Small" }) =>
-    DefaultLight.Checkbox.sizes[size].fontSize};
+    resolveTheme(theme).Checkbox.sizes[size].fontSize};
 
   cursor: pointer;
 `;
@@ -83,7 +83,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       color = "Default",
-      theme = "Light",
       size = "Small",
       disabled,
       label,
@@ -108,11 +107,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <CheckboxContainer
-        theme={theme === "Light" ? DefaultLight : DefaultLight}
       >
         <CheckboxInput
           type="checkbox"
-          theme={theme === "Light" ? DefaultLight : DefaultLight}
           size={size}
           color={color}
           disabled={disabled}
@@ -124,7 +121,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
         {label && (
           <CheckboxLabel
-            theme={theme === "Light" ? DefaultLight : DefaultLight}
             size={size}
           >
             {label}

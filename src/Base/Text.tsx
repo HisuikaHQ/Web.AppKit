@@ -1,13 +1,12 @@
 import React, { CSSProperties, ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
-import { BaseObject } from "styled-components/dist/types";
+import { resolveTheme } from "../Common/Themes/resolveTheme";
 
 export interface TextProps
   extends React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLParagraphElement>,
       HTMLParagraphElement
-    >,
-    BaseObject {
+    > {
   className?: string;
   style?: CSSProperties;
   text?: string;
@@ -26,7 +25,8 @@ const TextElement = styled.p<{
 }>`
   font-family: "Outfit", sans-serif;
   font-size: ${({ size }) => (size ? size + "pt" : "9pt")};
-  color: ${({ disabled, color }) => (disabled ? "#bababa" : color || "black")};
+  color: ${({ disabled, color, theme }) =>
+    disabled ? resolveTheme(theme).Base.disabledTextColor : color || resolveTheme(theme).Base.textColor};
   padding: 0;
   margin: 0;
   white-space: ${({ wordWrap }) => (wordWrap ? "normal" : "nowrap")};

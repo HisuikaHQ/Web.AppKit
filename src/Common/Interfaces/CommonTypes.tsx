@@ -1,7 +1,8 @@
-import {DefaultLight} from "../Themes/DefaultLight";
+import type {UiTheme} from "../Themes/UiTheme";
 
+// eslint-disable-next-line @typescript-eslint/no-namespace -- public API exposes CommonTypes.X
 export namespace CommonTypes {
-    export type Theme = typeof DefaultLight | 'Light' | 'Dark';
+    export type Theme = UiTheme;
     export type Size = 'Small' | 'Medium' | 'Large';
     export type Color =
     | "Default"

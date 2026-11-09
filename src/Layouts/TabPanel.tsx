@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import cx from "clsx";
 
 interface TabPanelProps {
   children: ReactNode;
@@ -19,11 +20,7 @@ export function TabPanel({
   return (
     <div
       {...props}
-      className={[
-        "Layouts__TabPanel",
-        "TabPanel",
-        selected ? "Layouts__TabPanel--selected" : "",
-      ].join(" ")}
+      className={cx("Layouts__TabPanel", "TabPanel", selected && "Layouts__TabPanel--selected", className)}
       role="tabpanel"
       id={`panel${id}`}
       aria-labelledby={`tab${id}`}

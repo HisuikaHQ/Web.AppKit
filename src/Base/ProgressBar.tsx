@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ComponentBaseProps } from "../Common/Interfaces/ComponentBaseProps";
-import { DefaultLight } from "../Common/Themes/DefaultLight";
+import { resolveTheme } from "../Common/Themes/resolveTheme";
 import { CommonTypes } from "../Common/Interfaces";
 
 type HTMLDivProps = Pick<
@@ -45,7 +45,7 @@ const BarContainer = styled.div<{ size: string }>`
   width: 100%;
   height: ${({ size }) =>
     size === "Small" ? "4px" : size === "Medium" ? "8px" : "12px"};
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: ${({ theme }) => resolveTheme(theme).Base.trackColor};
   border-radius: 999px;
   overflow: hidden;
   position: relative;
@@ -58,19 +58,19 @@ const DeterminateBar = styled.div<{ value: number; color: CommonTypes.Color }>`
   height: 100%;
   width: ${({ value }) => `${value}%`};
   background-color: ${({ theme, color }) =>
-    DefaultLight.Button[color].backgroundColor};
+    resolveTheme(theme).Button[color].backgroundColor};
   border-radius: 999px;
   transition: width 0.2s ease;
 `;
 
-const IndeterminateBar = styled.div<{ color: string }>`
+const IndeterminateBar = styled.div<{ color: CommonTypes.Color }>`
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   background-color: ${({ theme, color }) =>
-    DefaultLight.Button[color].backgroundColor};
+    resolveTheme(theme).Button[color].backgroundColor};
   border-radius: 999px;
   transform-origin: left;
   animation: ${primaryIndeterminate} 2s infinite linear;
@@ -81,7 +81,7 @@ const LabelContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.8);
+  color: ${({ theme }) => resolveTheme(theme).Base.textColor};
 `;
 
 export const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(

@@ -1,6 +1,10 @@
+import { isValidElement } from "react";
+
 function makeTypeChecker(tabsRole: string) {
-  return (element: { type: { tabsRole: string } }) =>
-    !!element.type && element.type.tabsRole === tabsRole;
+  return (element: unknown): boolean =>
+    isValidElement(element) &&
+    typeof element.type !== "string" &&
+    (element.type as { tabsRole?: string }).tabsRole === tabsRole;
 }
 
 export const isTab = makeTypeChecker("Tab");

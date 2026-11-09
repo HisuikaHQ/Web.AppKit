@@ -2,16 +2,16 @@ import styled from "styled-components";
 import {Text} from "../Base/Text";
 import {FlexLayout} from "../Layouts/FlexLayout";
 import {ComponentBaseProps} from "../Common/Interfaces";
-import {DefaultLight} from "../Common/Themes/DefaultLight";
+import {resolveTheme} from "../Common/Themes/resolveTheme";
 
 const HeaderElement = styled(FlexLayout)<AppHeaderProps>`
     background-color: ${({displayBackground, theme}) =>
-            displayBackground ? DefaultLight.AppHeader.backgroundColor : "transparent"};
+            displayBackground ? resolveTheme(theme).AppHeader.backgroundColor : "transparent"};
     min-height: 2.5em;
     padding: 5px 10px;
     margin: 0;
     border-bottom: ${({displayBackground, theme}) =>
-            displayBackground ? DefaultLight.AppHeader.border : "none"};
+            displayBackground ? resolveTheme(theme).AppHeader.border : "none"};
     z-index: 999;
 
     // Enable fixed mode

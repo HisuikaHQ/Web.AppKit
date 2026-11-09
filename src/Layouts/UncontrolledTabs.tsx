@@ -31,8 +31,10 @@ interface TabProps {
   selectedIndex: number;
   selectedTabClassName?: string;
   selectedTabPanelClassName?: string;
-  environment?: typeof window | null; // Plus précis que any
+  environment?: typeof window | null;
 }
+
+type ParentElement = ReactElement<{ children?: ReactNode }>;
 
 function isNode(node: HTMLElement | null): node is HTMLElement {
   return !!node && "getAttribute" in node;
@@ -53,7 +55,7 @@ function determineCanUseActiveElement(environment: Window | null | undefined) {
 
   try {
     canUseActiveElement = !!(env && env.document && env.document.activeElement);
-  } catch (e) {
+  } catch {
     // Work around for IE bug when accessing document.activeElement in an iframe
     canUseActiveElement = false;
   }
@@ -63,6 +65,7 @@ export const UncontrolledTabs: FunctionComponent<TabProps> = (props) => {
   const tabNodes = useRef<{ [key: string]: HTMLElement }>({});
   const tabIds = useRef<string[]>([]);
   const ref = useRef<HTMLDivElement>(null);
+  const id = useId();
 
   function getTabsCount() {
     const { children } = props;
@@ -161,14 +164,14 @@ export const UncontrolledTabs: FunctionComponent<TabProps> = (props) => {
     let diff = tabIds.current.length - getTabsCount();
 
     // Add ids if new tabs have been added
-    const id = useId();
     while (diff++ < 0) {
       tabIds.current.push(`${id}-${tabIds.current.length}`);
     }
 
     // Map children to dynamically setup refs
-    return deepMap(children as ReactElement, (child: any) => {
-      let result = child;
+    return deepMap(children, (element) => {
+      const child = element as ParentElement;
+      let result: ReactElement = child;
 
       // Clone TabList and Tab components to have refs
       if (isTabList(child)) {
@@ -186,13 +189,12 @@ export const UncontrolledTabs: FunctionComponent<TabProps> = (props) => {
           environment || (typeof window !== "undefined" ? window : undefined);
         if (canUseActiveElement && env) {
           wasTabFocused = React.Children.toArray(child.props.children)
-            // @ts-ignore
             .filter(isTab)
             .some((tab, i) => env.document.activeElement === getTab(i));
         }
 
         result = cloneElement(child, {
-          children: deepMap(child.props.children, (tab: any) => {
+          children: deepMap(child.props.children, (tab) => {
             const key = `tabs-${listIndex}`;
             const selected = selectedIndex === listIndex;
 
@@ -211,20 +213,18 @@ export const UncontrolledTabs: FunctionComponent<TabProps> = (props) => {
           }),
         });
       } else if (isTabPanel(child)) {
-        const props = {
+        const props: { id: string; selected: boolean; forceRender?: boolean } = {
           id: tabIds.current[index],
           selected: selectedIndex === index,
-          forceRender: undefined,
         };
 
         if (forceRenderTabPanel) {
-          // @ts-ignore
           props.forceRender = forceRenderTabPanel;
         }
 
         index++;
 
-        result = cloneElement(child, props);
+        result = cloneElement(element as ReactElement<typeof props>, props);
       }
 
       return result;
@@ -302,8 +302,7 @@ export const UncontrolledTabs: FunctionComponent<TabProps> = (props) => {
         }
 
         const index = Array.from(node.parentNode!.children)
-          // @ts-ignore
-          .filter(isTabNode)
+          .filter((child) => isTabNode(child as HTMLElement))
           .indexOf(node);
         setSelected(index, e as unknown as Event);
         return;
@@ -323,17 +322,14 @@ export const UncontrolledTabs: FunctionComponent<TabProps> = (props) => {
       if (nodeAncestor === ref.current) return true;
       if (nodeAncestor?.getAttribute("data-uitabs")) break;
 
-      // @ts-ignore
-      nodeAncestor = nodeAncestor.parentElement;
+      nodeAncestor = nodeAncestor?.parentElement ?? null;
     } while (nodeAncestor);
 
     return false;
   }
 
   return (
-    // @ts-ignore
     <div
-      {...props}
       className={cx(props.className)}
       onClick={handleClick}
       onKeyDown={handleKeyDown}

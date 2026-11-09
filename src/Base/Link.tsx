@@ -1,49 +1,43 @@
 import React from "react";
-import styled, {ThemeProvider} from "styled-components";
+import styled from "styled-components";
 import {baseStyling} from "../Common/Styling/baseStyling";
+import {resolveTheme} from "../Common/Themes/resolveTheme";
+import type {UiTheme} from "../Common/Themes/UiTheme";
 
 export interface LinkProps {
     className?: string;
     children?: React.ReactNode;
     disabled?: boolean;
     href: string;
+    theme?: UiTheme;
 }
 
 const LinkElement = styled.a<LinkProps>`
     ${baseStyling};
     font-weight: 500;
-    color: ${(props) =>
-            props.disabled ? props.theme.disabledColor : props.theme.color};
+    color: ${({disabled, theme}) =>
+                disabled ? resolveTheme(theme).Link.disabledColor : resolveTheme(theme).Link.color};
     cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
     padding-inline: 5px;
     border-radius: 5px;
     text-decoration: none;
 
     &:hover {
-        background-color: ${(props) =>
-                props.disabled ? "transparent" : props.theme.backgroundColor};
-        color: ${(props) =>
-                props.disabled ? props.theme.disabledColor : props.theme.hoverColor};
+        background-color: ${({disabled, theme}) =>
+                disabled ? "transparent" : resolveTheme(theme).Link.backgroundColor};
+        color: ${({disabled, theme}) =>
+                disabled ? resolveTheme(theme).Link.disabledColor : resolveTheme(theme).Link.hoverColor};
     }
 
     &:active {
-        background-color: ${(props) =>
-                props.disabled ? "initial" : props.theme.activeBackgroundColor};
-        color: ${(props) =>
-                props.disabled ? props.theme.disabledColor : props.theme.activeColor};
+        background-color: ${({disabled, theme}) =>
+                disabled ? "initial" : resolveTheme(theme).Link.activeBackgroundColor};
+        color: ${({disabled, theme}) =>
+                disabled ? resolveTheme(theme).Link.disabledColor : resolveTheme(theme).Link.activeColor};
         user-select: none;
         -webkit-user-select: none;
     }
 `;
-
-const lightTheme = {
-    color: "#0097EC",
-    hoverColor: "#008ee3",
-    activeColor: "#0485d2",
-    disabledColor: "#bababa",
-    backgroundColor: "rgba(234, 234, 234, 0.4)",
-    activeBackgroundColor: "rgba(234, 234, 234, 0.50)",
-};
 
 export function Link({
                          children,
@@ -53,7 +47,6 @@ export function Link({
                          ...props
                      }: LinkProps) {
     return (
-        <ThemeProvider theme={lightTheme}>
             <LinkElement
                 className={[
                     `Base__Link${disabled ? "--Disabled" : ""}`,
@@ -66,6 +59,5 @@ export function Link({
             >
                 {children}
             </LinkElement>
-        </ThemeProvider>
     );
 }

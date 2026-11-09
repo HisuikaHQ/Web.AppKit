@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDetectClickOutside } from "react-detect-click-outside";
+import { useClickOutside } from "../Common/Hooks/useClickOutside";
 import { createPortal } from "react-dom";
 import styled, { css, keyframes } from "styled-components";
 import { LayoutProps } from "../Layouts/Layout";
@@ -126,11 +126,9 @@ export function Dialog({
     }
   }
 
-  const ref = useDetectClickOutside({
-    onTriggered: () => {
+  const ref = useClickOutside(() => {
       onClose?.();
-    },
-  });
+    });
 
   if (!visible) return null;
 

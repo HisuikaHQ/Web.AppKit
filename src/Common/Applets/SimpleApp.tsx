@@ -13,8 +13,9 @@ import { StackLayout } from "../../Layouts/StackLayout";
 import { BubbleContainer } from "../../Base/BubbleContainer";
 import { ScrollLayout } from "../../Layouts/ScrollLayout";
 import { Radio, RadioGroup } from "../../Base/Radio";
+import { DefaultDark, DefaultLight } from "../Themes";
 
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutlined";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -29,7 +30,10 @@ export function SimpleApp() {
   const [selectedSize, setSelectedSize] = useState("medium");
   const [selectedTheme, setSelectedTheme] = useState("light");
   return (
-    <AppActivity theme={"Light"} direction={"Vertical"}>
+    <AppActivity
+      theme={selectedTheme === "dark" ? DefaultDark : DefaultLight}
+      direction={"Vertical"}
+    >
       <AppHeader enableBackdropBlur enableFixedPosition>
         <FlexLayout direction={"Horizontal"} wrap={"nowrap"} spacing={3}>
           <GroupIconButtons>

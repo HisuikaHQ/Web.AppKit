@@ -2,38 +2,36 @@ import styled, { css } from "styled-components";
 import React, { forwardRef } from "react";
 import {CommonTypes, ComponentBaseProps} from "../Common/Interfaces";
 import { baseStyling } from "../Common/Styling/baseStyling";
-import { DefaultLight } from "../Common/Themes/DefaultLight";
+import { resolveTheme } from "../Common/Themes/resolveTheme";
 
-const RadioContainer = styled.div<{ theme: typeof DefaultLight }>
-`
+const RadioContainer = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: ${({ theme } ) => theme.RadioButton.gap};
+  gap: ${({ theme } ) => resolveTheme(theme).RadioButton.gap};
   cursor: pointer;
   user-select: none;
 `;
 
-const RadioInput = styled.input<RadioProps>
-`
+const RadioInput = styled.input<RadioProps>`
   ${baseStyling};
   appearance: none;
   position: relative;
   margin: 0;
   cursor: pointer;
-  border: ${({ theme }) => theme.RadioButton.borderWidth} solid
-    ${({ theme, color = "Default" }) => theme.Button[color].borderColor};
+  border: ${({ theme }) => resolveTheme(theme).RadioButton.borderWidth} solid
+    ${({ theme, color = "Default" }) => resolveTheme(theme).Button[color].borderColor};
   border-radius: 50%;
-  transition: ${({ theme }) => theme.RadioButton.transition};
+  transition: ${({ theme }) => resolveTheme(theme).RadioButton.transition};
 
   ${({ theme, size = "Small" }) => css`
-    width: ${theme.RadioButton.sizes[size].width};
-    height: ${theme.RadioButton.sizes[size].height};
+    width: ${resolveTheme(theme).RadioButton.sizes[size].width};
+    height: ${resolveTheme(theme).RadioButton.sizes[size].height};
   `}
 
   &:checked {
     background-color: transparent;
     border-color: ${({ theme, color = "Default" }) =>
-      theme.Button[color].borderColor};
+      resolveTheme(theme).Button[color].borderColor};
 
     &::after {
       content: "";
@@ -45,13 +43,13 @@ const RadioInput = styled.input<RadioProps>
       height: 50%;
       border-radius: 50%;
       background-color: ${({ theme, color = "Default" }) =>
-        theme.Button[color].backgroundColor};
+        resolveTheme(theme).Button[color].backgroundColor};
     }
   }
 
   &:focus-visible {
     box-shadow: ${({ theme, color = "Default" }) =>
-        theme.Button[color].shadowColor}
+        resolveTheme(theme).Button[color].shadowColor}
       0 0 0 0.2em;
     outline: none;
   }
@@ -59,30 +57,28 @@ const RadioInput = styled.input<RadioProps>
   ${({ theme, disabled }) =>
     disabled &&
     css`
-      opacity: ${theme.RadioButton.disabled.opacity};
+      opacity: ${resolveTheme(theme).RadioButton.disabled.opacity};
       cursor: not-allowed;
       pointer-events: none;
     `}
 `;
 
 const RadioLabel = styled.label<{
-    size: CommonTypes.Size, theme: typeof DefaultLight
-}>
-`
+    size: CommonTypes.Size
+}>`
   font-family: "Outfit", sans-serif;
   font-size: ${({ theme, size }) =>
-    theme.RadioButton.sizes[size].fontSize};
+    resolveTheme(theme).RadioButton.sizes[size].fontSize};
   cursor: pointer;
 `;
 
 const StyledRadioGroup = styled.div<{
-    direction?: "horizontal" | "vertical", theme: typeof DefaultLight
-}>
-`
+    direction?: "horizontal" | "vertical"
+}>`
   display: flex;
   flex-direction: ${({ direction }) =>
     direction === "horizontal" ? "row" : "column"};
-  gap: ${({ theme }) => theme.RadioButton.gap};
+  gap: ${({ theme }) => resolveTheme(theme).RadioButton.gap};
 `;
 
 export interface RadioProps extends ComponentBaseProps {
@@ -92,7 +88,6 @@ export interface RadioProps extends ComponentBaseProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   value?: string;
-  theme?: typeof DefaultLight;
 }
 
 interface RadioGroupProps
@@ -108,7 +103,6 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   (
     {
       color = "Default",
-      theme = "Light",
       size = "Small",
       disabled,
       label,
@@ -121,10 +115,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     ref
   ) => {
     return (
-      <RadioContainer theme={theme === "Light" ? DefaultLight : DefaultLight}>
+      <RadioContainer>
         <RadioInput
           type="radio"
-          theme={theme === "Light" ? DefaultLight : DefaultLight}
           size={size}
           color={color}
           disabled={disabled}
@@ -137,7 +130,6 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
         />
         {label && (
           <RadioLabel
-            theme={theme === "Light" ? DefaultLight : DefaultLight}
             size={size}
           >
             {label}
@@ -163,11 +155,13 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   return (
     <StyledRadioGroup direction={direction} {...props}>
       {React.Children.map(children, (child) => {
-        if (!React.isValidElement(child)) return null;
-        return React.cloneElement(child as React.ReactElement<RadioProps>, {
+        if (!React.isValidElement<RadioProps>(child)) return null;
+        const childValue = child.props.value;
+        if (childValue === undefined) return child;
+        return React.cloneElement(child, {
           name,
-          checked: child.props.value === value,
-          onChange: () => handleChange(child.props.value),
+          checked: childValue === value,
+          onChange: () => handleChange(childValue),
         });
       })}
     </StyledRadioGroup>

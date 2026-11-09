@@ -3,7 +3,7 @@ import React, { forwardRef, ReactElement } from "react";
 import { ComponentBaseProps } from "../Common/Interfaces";
 import { buttonBaseStyling } from "../Common/Styling/buttonBaseStyling";
 import { baseStyling } from "../Common/Styling/baseStyling";
-import { DefaultLight } from "../Common/Themes/DefaultLight";
+import { resolveTheme } from "../Common/Themes/resolveTheme";
 
 interface IconButtonProps extends ComponentBaseProps {
   isGrouped?: boolean;
@@ -22,14 +22,14 @@ const StyledIconButton = styled.button<IconButtonProps>`
   place-items: center;
   background: none;
   color: ${({ theme }) =>
-    DefaultLight.IconButton.color[theme === "Dark" ? "dark" : "light"]};
-  padding: ${({ theme }) => DefaultLight.IconButton.padding};
+    resolveTheme(theme).IconButton.color};
+  padding: ${({ theme }) => resolveTheme(theme).IconButton.padding};
   border-radius: ${({ theme, isGrouped, isFirst, isLast }) => {
-    if (!isGrouped) return DefaultLight.IconButton.borderRadius;
+    if (!isGrouped) return resolveTheme(theme).IconButton.borderRadius;
     if (isFirst)
-      return `${DefaultLight.IconButton.borderRadius} 0 0 ${DefaultLight.IconButton.borderRadius}`;
+      return `${resolveTheme(theme).IconButton.borderRadius} 0 0 ${resolveTheme(theme).IconButton.borderRadius}`;
     if (isLast)
-      return `0 ${DefaultLight.IconButton.borderRadius} ${DefaultLight.IconButton.borderRadius} 0`;
+      return `0 ${resolveTheme(theme).IconButton.borderRadius} ${resolveTheme(theme).IconButton.borderRadius} 0`;
     return "0";
   }};
 
@@ -45,16 +45,16 @@ const StyledIconButton = styled.button<IconButtonProps>`
     `}
 
   &:hover {
-    background-color: ${({ theme }) => DefaultLight.IconButton.hover.backgroundColor};
+    background-color: ${({ theme }) => resolveTheme(theme).IconButton.hover.backgroundColor};
   }
 
   &:active {
-    background-color: ${({ theme }) => DefaultLight.IconButton.active.backgroundColor};
+    background-color: ${({ theme }) => resolveTheme(theme).IconButton.active.backgroundColor};
   }
 
   &:focus-within {
     box-shadow: ${({ theme }) =>
-      `${DefaultLight.IconButton.focus.shadowColor} 0 0 0 0.3em`};
+      `${resolveTheme(theme).IconButton.focus.shadowColor} 0 0 0 0.3em`};
   }
 `;
 

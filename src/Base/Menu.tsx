@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useDetectClickOutside } from "react-detect-click-outside";
+import { useClickOutside } from "../Common/Hooks/useClickOutside";
 
 export interface MenuProps {
   className?: string;
@@ -35,9 +35,7 @@ const MenuTitleElement = styled.div`
 
 export function Menu({ children, className, title, ...props }: MenuProps) {
   const [displayMenu, setDisplayMenu] = useState(false);
-  const ref = useDetectClickOutside({
-    onTriggered: () => setDisplayMenu(false),
-  });
+  const ref = useClickOutside(() => setDisplayMenu(false));
   const menuTitle = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

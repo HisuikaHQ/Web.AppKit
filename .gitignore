@@ -25,3 +25,4 @@ dist-ssr
 /.yarn/
 /büng/.yarn/
 /.npmrc
+storybook-static

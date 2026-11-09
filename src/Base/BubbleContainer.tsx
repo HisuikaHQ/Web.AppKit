@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {baseStyling} from "../Common/Styling/baseStyling";
 import {ComponentBaseProps} from "../Common/Interfaces";
-import {DefaultLight} from "../Common/Themes/DefaultLight";
+import {resolveTheme} from "../Common/Themes/resolveTheme";
 
 const StyledBubble = styled.div`
     ${baseStyling};
@@ -10,7 +10,7 @@ const StyledBubble = styled.div`
     overflow: hidden;
     width: 3.5rem;
     height: 3.5rem;
-    background-color: ${({theme}) => DefaultLight.Bubbles.backgroundColor ?? 'transparent'};
+    background-color: ${({theme}) => resolveTheme(theme).Bubbles.backgroundColor};
     border-radius: 100%;
     transition: all 0.3s linear;
     cursor: pointer;
@@ -23,10 +23,10 @@ const StyledBubble = styled.div`
     }
 `;
 
-export function BubbleContainer({...props}: ComponentBaseProps) {
+export function BubbleContainer({children, ...props}: ComponentBaseProps) {
     return (
-        <StyledBubble>
-            {props.children}
+        <StyledBubble {...props}>
+            {children}
         </StyledBubble>
     )
 }

@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import styled from "styled-components";
 import {CommonTypes} from "../Common/Interfaces";
-import {DefaultLight} from "../Common/Themes/DefaultLight";
+import type {UiTheme} from "../Common/Themes/UiTheme";
 
 export interface LayoutProps {
     children?: ReactNode;
@@ -14,7 +14,7 @@ export interface LayoutProps {
     maxWidth?: CommonTypes.CSSSize;
     maxHeight?: CommonTypes.CSSSize;
     style?: React.CSSProperties;
-    theme?: typeof DefaultLight | "Light" | "Dark";
+    theme?: UiTheme;
 }
 
 const LayoutElement = styled.div<LayoutProps>`

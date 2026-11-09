@@ -1,7 +1,21 @@
-export const DefaultLight = {
+import type { UiTheme } from "./UiTheme";
+
+export const DefaultLight: UiTheme = {
+  name: "Light",
   Base: {
     borderRadius: "5px",
     defaultBackgroundColor: "#fffefe",
+    textColor: "#000000",
+    disabledTextColor: "#bababa",
+    trackColor: "rgba(0, 0, 0, 0.1)",
+  },
+  Link: {
+    color: "#0097EC",
+    hoverColor: "#008ee3",
+    activeColor: "#0485d2",
+    disabledColor: "#bababa",
+    backgroundColor: "rgba(234, 234, 234, 0.4)",
+    activeBackgroundColor: "rgba(234, 234, 234, 0.50)",
   },
   Bubbles: {
     backgroundColor: "#ffffff",
@@ -15,7 +29,6 @@ export const DefaultLight = {
   },
   UiApp: {
     backgroundColor: "#fffefe",
-    // border: '1px solid rgba(0, 0, 0, 0.2)',
     border: "none",
     boxShadow: "-3px -3px 15px 0px rgba(181,181,181,0.5)",
     borderRadius: "8px",
@@ -25,6 +38,7 @@ export const DefaultLight = {
     borderColor: "rgba(70, 70, 70, 0.5)",
     outlineColor: "rgba(154, 152, 152, 0.5)",
     backgroundColor: "rgb(255, 255, 255)",
+    textColor: "#000000",
   },
   Button: {
     Default: {
@@ -145,10 +159,7 @@ export const DefaultLight = {
     },
   },
   IconButton: {
-    color: {
-      light: "#1a1a1a",
-      dark: "#ffffff",
-    },
+    color: "#1a1a1a",
     hover: {
       backgroundColor: "rgba(0, 0, 0, 0.1)",
     },

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {baseStyling} from "../Common/Styling/baseStyling";
 import {ComponentBaseProps} from "../Common/Interfaces";
-import {DefaultLight} from "../Common/Themes/DefaultLight";
+import {resolveTheme} from "../Common/Themes/resolveTheme";
 
 const StyledAvatar = styled.div<ComponentBaseProps>`
     ${baseStyling};
@@ -9,24 +9,17 @@ const StyledAvatar = styled.div<ComponentBaseProps>`
     place-items: center;
     width: 3.5rem;
     height: 3.5rem;
-    background-color: ${({theme}) => 
-            // FIXME: theming
-            theme === "Light"
-                    ? DefaultLight.Bubbles.backgroundColor 
-                    : DefaultLight.Bubbles.backgroundColor
-                //  : DefaultDark.Bubbles.backgroundColor
-                    ?? 'transparent'
-            };
+    background-color: ${({theme}) => resolveTheme(theme).Bubbles.backgroundColor};
     border-radius: 100%;
     transition: all 0.3s linear;
     cursor: pointer;
     user-select: none;
 `;
 
-export function Avatar({...props}: ComponentBaseProps) {
+export function Avatar({children, ...props}: ComponentBaseProps) {
     return (
-        <StyledAvatar>
-            {props.children}
+        <StyledAvatar {...props}>
+            {children}
         </StyledAvatar>
     )
 }

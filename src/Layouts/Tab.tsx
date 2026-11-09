@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactNode, useEffect, useRef } from "react";
 import styled from "styled-components";
+import cx from "clsx";
 
 const TabElement = styled.li<{ selected: boolean }>`
   display: inline-block;
@@ -32,7 +33,7 @@ interface TabProps {
   tabRef?: (node: HTMLElement | null) => void; // marked as private in PropTypes
 }
 
-export const Tab: FunctionComponent<TabProps> = ({
+const TabComponent: FunctionComponent<TabProps> = ({
   children,
   className,
   disabled,
@@ -54,14 +55,14 @@ export const Tab: FunctionComponent<TabProps> = ({
   return (
     <TabElement
       {...props}
-      className={[
+      className={cx(
         "Layouts__Tab",
         "Tab",
-        selected ? "Layouts__Tab--selected" : "",
-        disabled ? "Layouts__Tab--disabled" : "",
-      ].join(" ")}
+        selected && "Layouts__Tab--selected",
+        disabled && "Layouts__Tab--disabled",
+        className,
+      )}
       ref={(node) => {
-        // @ts-ignore
         nodeRef.current = node;
         if (tabRef) tabRef(node);
       }}
@@ -71,8 +72,7 @@ export const Tab: FunctionComponent<TabProps> = ({
       aria-selected={selected ? "true" : "false"}
       aria-disabled={disabled ? "true" : "false"}
       aria-controls={`panel${id}`}
-      // @ts-ignore
-      tabIndex={tabIndex ?? (selected ? "0" : "-1")}
+      tabIndex={tabIndex !== undefined ? Number(tabIndex) : selected ? 0 : -1}
       data-uitab
     >
       {children}
@@ -80,5 +80,4 @@ export const Tab: FunctionComponent<TabProps> = ({
   );
 };
 
-// @ts-ignore
-Tab.tabsRole = "Tab";
+export const Tab = Object.assign(TabComponent, { tabsRole: "Tab" });

@@ -1,15 +1,16 @@
-import React from "react";
-import styled, {ThemeProvider} from "styled-components";
+import {use} from "react";
+import styled, {ThemeContext, ThemeProvider} from "styled-components";
 import {FlexLayout} from "../Layouts/FlexLayout";
-import {DefaultLight} from "../Common/Themes/DefaultLight";
+import {resolveTheme} from "../Common/Themes/resolveTheme";
+import type {UiTheme} from "../Common/Themes/UiTheme";
 import {LayoutProps} from "../Layouts/Layout";
 
-interface AppActivityProps extends LayoutProps {
+export interface AppActivityProps extends LayoutProps {
     direction?: "Vertical" | "Horizontal";
-    theme: typeof DefaultLight | "Light" | "Dark";
+    theme?: UiTheme;
 }
 
-const AppActivityElement = styled(FlexLayout)<AppActivityProps>`
+const AppActivityElement = styled(FlexLayout)`
     @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
     @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded");
 
@@ -17,7 +18,6 @@ const AppActivityElement = styled(FlexLayout)<AppActivityProps>`
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        // Default Display font
         font-family: "Outfit", sans-serif;
         font-size: 9pt;
     }
@@ -30,29 +30,24 @@ const AppActivityElement = styled(FlexLayout)<AppActivityProps>`
         "GRAD" 0,
         "opsz" 48;
     }
-    
+
     &.AppActivity {
-        // FIXME: issue with dynamic theming
-        background-color: ${
-                ({theme}) => 
-                    theme === "Light" 
-                            ? DefaultLight.AppActivity.backgroundColor 
-                            : DefaultLight.AppActivity.backgroundColor
-                }; // FIXME:  DefaultDark.AppActivity.backgroundColor instead.
+        background-color: ${({theme}) => resolveTheme(theme).AppActivity.backgroundColor};
+        color: ${({theme}) => resolveTheme(theme).Base.textColor};
         min-height: 100vh;
     }
-
 `;
 
 export function AppActivity({
                                 children,
                                 direction = "Horizontal",
                                 className,
-                                theme = "Light",
+                                theme,
                                 ...props
                             }: AppActivityProps) {
+    const inheritedTheme = use(ThemeContext);
     return (
-        <ThemeProvider theme={theme === 'Light' ? DefaultLight : DefaultLight}>
+        <ThemeProvider theme={theme ?? resolveTheme(inheritedTheme)}>
             <AppActivityElement
                 className={[
                     "Appl__AppActivity",
@@ -65,6 +60,5 @@ export function AppActivity({
                 {children}
             </AppActivityElement>
         </ThemeProvider>
-
     );
 }

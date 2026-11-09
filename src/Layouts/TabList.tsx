@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
+import cx from "clsx";
 
 TabList.tabsRole = "TabList";
 
@@ -23,7 +24,7 @@ export function TabList({
   return (
     <TabListElement
       {...props}
-      className={["Layouts__TabList", "TabList"].join(" ")}
+      className={cx("Layouts__TabList", "TabList", className)}
       role="tablist"
     >
       {children}

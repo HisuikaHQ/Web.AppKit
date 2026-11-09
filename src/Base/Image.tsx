@@ -29,13 +29,13 @@ export function Image({
     const showImage = (loadEvent: React.SyntheticEvent<HTMLImageElement, Event> | null = null) => {
         loadEvent?.persist();
         setImageLoaded(true);
-        loadEvent && onLoad(loadEvent);
+        if (loadEvent) onLoad(loadEvent);
     };
 
     const handleError = (errorEvent: React.SyntheticEvent<HTMLImageElement, Event> | null = null) => {
         errorEvent?.persist();
         setIsValidSrc(false);
-        errorEvent && onError(errorEvent);
+        if (errorEvent) onError(errorEvent);
     };
 
     useEffect(() => {

@@ -2,7 +2,8 @@
 import "./Common/fonts.scss";
 
 // Theme
-import { DefaultLight } from "./Common/Themes/DefaultLight";
+import { DefaultLight, DefaultDark, resolveTheme } from "./Common/Themes";
+import type { UiTheme, ButtonColorTheme, ToggleSizeTheme } from "./Common/Themes";
 
 // Base Components
 import { Button } from "./Base/Button";
@@ -99,7 +100,7 @@ export {
   Separator,
 };
 
-export type { CommonTypes, ComponentBaseProps };
+export type { CommonTypes, ComponentBaseProps, UiTheme, ButtonColorTheme, ToggleSizeTheme };
 
 // Theme
-export { DefaultLight };
+export { DefaultLight, DefaultDark, resolveTheme };

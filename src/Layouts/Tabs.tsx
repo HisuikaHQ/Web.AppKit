@@ -1,6 +1,6 @@
 import React, {
   createContext,
-  useContext,
+  use,
   useState,
   ReactNode,
   useMemo,
@@ -54,7 +54,7 @@ const TabsContext = createContext<TabsContextType | undefined>(undefined);
 
 // Hook
 const useTabs = () => {
-  const context = useContext(TabsContext);
+  const context = use(TabsContext);
   if (!context) {
     throw new Error("Tabs components must be used within a Tabs component");
   }
